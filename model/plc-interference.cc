@@ -59,22 +59,31 @@ PLC_Interference::GetTypeId  (void)
 {
 	static TypeId tid = ns3::TypeId ("ns3::PLC_Interference")
 			.SetParent<Object>  ()
+			.SetGroupName("PLC")
 			.AddTraceSource  ("AllSignals",
 							 "Sum of all signal PSDs at the receiver frontend",
 							 MakeTraceSourceAccessor  (&PLC_Interference::m_sumSignalTracer),
-                                                         "ns3::SpectrumValue::TracedCallCallBack")
+							 "ns3::TracedValue< SpectrumValue >", // Initial value
+							 TypeId::SUPPORTED, // Support level
+							 "PLC") // Module
 			.AddTraceSource  ("RxSignal",
 							 "PSD of the signal the receiver is currently locked to",
 							 MakeTraceSourceAccessor  (&PLC_Interference::m_rxSignalTracer),
-                                                         "ns3::SpectrumValue::TracedCallCallBack")
+							 "ns3::TracedValue< SpectrumValue >", // Initial value
+							 TypeId::SUPPORTED, // Support level
+							 "PLC") // Module
 			.AddTraceSource  ("NoiseSignals",
 							 "Sum of all interfering signals at the receiver frontend",
 							 MakeTraceSourceAccessor  (&PLC_Interference::m_noiseSignalTracer),
-                                                         "ns3::SpectrumValue::TracedCallCallBack")
+							 "ns3::TracedValue< SpectrumValue >", // Initial value
+							 TypeId::SUPPORTED, // Support level
+							 "PLC") // Module
 			.AddTraceSource  ("SINR",
 							 "Signal to Interference plus Noise Ratio while receiving",
 							 MakeTraceSourceAccessor  (&PLC_Interference::m_SinrTracer),
-                                                         "ns3::SpectrumValue::TracedCallCallBack")
+							 "ns3::TracedValue< SpectrumValue >", // Initial value
+							 TypeId::SUPPORTED, // Support level
+							 "PLC") // Module
 			;
 	return tid;
 }

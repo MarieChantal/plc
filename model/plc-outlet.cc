@@ -95,7 +95,7 @@ PLC_Outlet::SetImpedance (Ptr<PLC_Impedance> impedance, bool updateImmediately)
 
 	if (m_node->GetImpedancePtr() == impedance) return;
 
-	if (impedance == NULL)
+	if (impedance == nullptr)
 	{
 		NS_LOG_DEBUG ("Switching to open circuit");
 	}

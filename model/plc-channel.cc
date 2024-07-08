@@ -19,12 +19,13 @@
  */
 
 #include <math.h>
+#include <omp.h>
 #include <boost/graph/copy.hpp>
 
 #include <ns3/double.h>
 #include <ns3/log.h>
 #include <ns3/simulator.h>
-#include <ns3/system-thread.h>
+#include <thread>
 
 #include "plc-channel.h"
 #include "plc-defs.h"
@@ -138,6 +139,7 @@ PLC_ChannelTransferImpl::GetTypeId  (void)
 {
 	static TypeId tid = ns3::TypeId ("ns3::PLC_ChannelTransferImpl")
     		.SetParent<Object>  ()
+	        .SetGroupName("PLC")
     	    .AddAttribute  ("Delay", "Transmission delay through the p2p channel",
     	    		 	 	TypeId::ATTR_GET | TypeId::ATTR_CONSTRUCT,
     	    		 	 	TimeValue  (Seconds  (0)),
@@ -146,7 +148,9 @@ PLC_ChannelTransferImpl::GetTypeId  (void)
 			.AddTraceSource  ("PLC_ChannelData",
 							 "Channel Transfer Function Data after every change",
 							 MakeTraceSourceAccessor  (&PLC_ChannelTransferImpl::m_channelDataTracer),
-                                                         "ns3::PLC_TransferBase::TracedCallback")
+					         "ns3::TracedValue< SpectrumValue >", // Initial value
+					         TypeId::SUPPORTED, // Support level
+					         "PLC") // Module
     	    ;
 	return tid;
 }
@@ -783,7 +787,7 @@ PLC_ChannelTransferImpl::SetTimeVariant (void)
 	if  (!IsTimeVariant ()) {
 		NS_LOG_LOGIC ("Setting ctv time-variant");
 
-		if  (m_channel_transfer_vector != NULL) {
+		if  (m_channel_transfer_vector != nullptr) {
 			NS_LOG_LOGIC ("Old ctv: " << *m_channel_transfer_vector);
 			m_channel_transfer_vector = CreateObject<PLC_TimeVariantTransferVector>
 				 (*static_cast<PLC_TransferVector *> (PeekPointer (m_channel_transfer_vector)));
@@ -919,16 +923,21 @@ TypeId
 PLC_Channel::GetTypeId  (void)
 {
 	static TypeId tid = ns3::TypeId ("ns3::PLC_Channel")
-    		.SetParent<Channel>  ()
+	        .SetParent<Channel>  ()
+	        .SetGroupName("PLC")
     	    .AddTraceSource ("PLC_ChannelState",
     	                     "Trace occupancy of the channel",
     	                     MakeTraceSourceAccessor (&PLC_Channel::m_occupancyLogger),
-                             "ns3::uint32_t::TracedCallback")
-	    .AddTraceSource ("PLC_ActiveTransmitters",
-		             "Trace active transmission sources",
-        	             MakeTraceSourceAccessor (&PLC_Channel::m_activeTxIfLogger),
-                             "ns3::uint32_t::TracedCallback")
-			;
+					         "ns3::TracedValue< SpectrumValue >", // Initial value
+					         TypeId::SUPPORTED, // Support level
+					         "PLC") // Module
+			.AddTraceSource ("PLC_ActiveTransmitters",
+							 "Trace active transmission sources",
+							 MakeTraceSourceAccessor (&PLC_Channel::m_activeTxIfLogger),
+					         "ns3::TracedValue< SpectrumValue >", // Initial value
+					         TypeId::SUPPORTED, // Support level
+					         "PLC") // Module
+	        ;
 	return tid;
 }
 

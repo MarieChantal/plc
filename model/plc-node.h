@@ -125,7 +125,7 @@ public:
 	 *
 	 * @return true if node has an outlet
 	 */
-	bool HasOutlet (void) { return m_outlet == NULL ? false : true; }
+	bool HasOutlet (void) { return m_outlet == nullptr ? false : true; }
 
 	/**
 	 *

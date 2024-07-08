@@ -22,7 +22,6 @@
 #include "plc-time.h"
 #include "plc-phy.h"
 #include "plc-simulator-impl.h"
-#include "ns3/assert.h"
 
 namespace ns3 {
 
@@ -41,7 +40,7 @@ PLC_Time::SetTimeModel(double mainsFreq, size_t timeslots)
 
 	g_period_s = 1 / mainsFreq;
 	g_period = Time::FromDouble(g_period_s, Time::S);
-	NS_ASSERT(g_period > Time::FromDouble(0.0, Time::S));//ADD FRANCOIS
+	NS_ASSERT(g_period.IsStrictlyPositive());
 
 	g_resolution_s = g_period_s / timeslots;
 	Time g_resolution = Time::FromDouble(g_resolution_s, Time::S);
@@ -59,9 +58,10 @@ PLC_Time::SetTimeModel(double mainsFreq, Time tSymbol)
 	g_timeslots = ceil(g_period_s / tSymbol.GetSeconds());
 
 	g_period = Time::FromDouble(g_period_s, Time::S);
-	NS_ASSERT(g_period > Time::FromDouble(0.0, Time::S));//ADD FRANCOIS
+	NS_ASSERT(g_period.IsStrictlyPositive());
 
 	g_resolution_s = tSymbol.GetDouble();
+	Time g_resolution = Time::FromDouble(g_resolution_s, Time::S);
 
 //	Ptr<PLC_SimulatorImpl> simImpl = CreateObject<PLC_SimulatorImpl> ();
 //	Simulator::SetImplementation(simImpl);
@@ -76,7 +76,7 @@ PLC_Time::SetTimeModel(double mainsFreq, size_t timeslots, Time tSymbol)
 
 	g_period_s = 1 / mainsFreq;
 	g_period = Time::FromDouble(g_period_s, Time::S);
-	NS_ASSERT(g_period > Time::FromDouble(0.0, Time::S));//ADD FRANCOIS
+	NS_ASSERT(g_period.IsStrictlyPositive());
 
 	g_resolution_s = g_period_s / timeslots;
 	Time g_resolution = Time::FromDouble(g_resolution_s, Time::S);

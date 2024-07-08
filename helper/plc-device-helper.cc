@@ -135,7 +135,7 @@ PLC_NetDeviceHelper::Setup(void)
 		NS_ASSERT_MSG (m_payload_mcs.mct >= BPSK_RATELESS, "Payload modulation and coding type (" << m_payload_mcs << ") not compatible with PLC_IncrementalRedundancyPhy");
 	}
 
-	if (m_noiseFloor == NULL)
+	if (m_noiseFloor == nullptr)
 	{
 		m_noiseFloor = CreateBestCaseBgNoise(m_spectrum_model)->GetNoisePsd();
 	}

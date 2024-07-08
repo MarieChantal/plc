@@ -22,7 +22,8 @@
 #define PLC_ThreadDispatcher_H_
 
 #include <vector>
-#include <ns3/system-thread.h>
+#include <thread>
+#include "ns3/callback.h"
 
 namespace ns3 {
 
@@ -42,7 +43,7 @@ class PLC_ThreadDispatcher
 private:
 	bool m_multithreading_enabled;
 	size_t m_max_threads;
-	std::vector<Ptr<SystemThread> > m_threads;
+	std::vector<std::unique_ptr<std::thread>> m_threads;
 };
 
 }

@@ -584,8 +584,8 @@ PLC_ArqMac::DoSetPhy (Ptr<PLC_Phy> phy)
 Ptr<PLC_Phy>
 PLC_ArqMac::DoGetPhy (void)
 {
-	NS_LOG_FUNCTION (this);
-	//NS_ASSERT_MSG(m_phy, "Phy not set");
+	// NS_LOG_FUNCTION (this);
+	NS_ASSERT_MSG(m_phy, "Phy not set");
 	return m_phy;
 }
 
@@ -598,19 +598,19 @@ PLC_ArqMac::NotifyAcknowledgement (void)
 	m_requestCCAEvent.Cancel ();
 	m_backoffEndEvent.Cancel ();
 
-        Ptr<Packet> p = m_txQueue->Dequeue ();
-        PLC_MacHeader hdr;
-        p->RemoveHeader(hdr);
+	Ptr<Packet> p = m_txQueue->Dequeue ();
+    PLC_MacHeader hdr;
+    p->RemoveHeader(hdr);
 
-        if (hdr.GetHasRelayHeader())
-        {
-                PLC_RelayMacHeader relayHeader;
-                p->RemoveHeader (relayHeader);
-        }
+    if (hdr.GetHasRelayHeader())
+    {
+        PLC_RelayMacHeader relayHeader;
+        p->RemoveHeader (relayHeader);
+    }
 
-        Mac48Address src_addr = hdr.GetSrcAddress ();
-        Mac48Address dst_addr = hdr.GetDstAddress ();
-        
+    Mac48Address src_addr = hdr.GetSrcAddress ();
+    Mac48Address dst_addr = hdr.GetDstAddress ();
+
 	if (!m_acknowledgement_callback.IsNull())
 	{
 		m_acknowledgement_callback(m_csmaca_attempts, p, src_addr, dst_addr);
@@ -657,7 +657,7 @@ PLC_ArqMac::NotifyCsmaCaConfirm (PLC_CsmaCaState state)
 	else
 	{
 		PLC_MAC_LOGIC ("Channel access failure");
-		if  (m_phy != NULL)
+		if  (m_phy != nullptr)
 		{
 			// reschedule CSMA/CA
 			if (m_csmaca_attempts++ < MAX_CSMACA_ATTEMPTS)
@@ -739,22 +739,22 @@ PLC_ArqMac::AcknowledgementTimeout(void)
 		{
 			PLC_MAC_INFO ("Maximum replays reached, transmission failed!");
 			Ptr<const Packet> p = m_txQueue->Dequeue();
-                        m_replays = 0;
+			m_replays = 0;
 
 			if (!m_transmission_failed_callback.IsNull())
 			{
-                                Ptr<Packet> lp = p->Copy();
-                                PLC_MacHeader hdr;
-                                lp->RemoveHeader(hdr);
+                Ptr<Packet> lp = p->Copy();
+                PLC_MacHeader hdr;
+                lp->RemoveHeader(hdr);
 
-                                if (hdr.GetHasRelayHeader())
-                                {
-                                  PLC_RelayMacHeader relayHeader;
-                                  lp->RemoveHeader (relayHeader);
-                                }
+                if (hdr.GetHasRelayHeader())
+                {
+                    PLC_RelayMacHeader relayHeader;
+                    lp->RemoveHeader (relayHeader);
+                }
 
-                        Mac48Address src_addr = hdr.GetSrcAddress ();
-                        Mac48Address dst_addr = hdr.GetDstAddress ();
+                Mac48Address src_addr = hdr.GetSrcAddress ();
+                Mac48Address dst_addr = hdr.GetDstAddress ();
 				m_transmission_failed_callback (lp, src_addr, dst_addr);
 			}
 
@@ -872,7 +872,7 @@ PLC_HarqMac::DoProcess (Ptr<const Packet> p)
 				 )
 		{
 			Ptr<const Packet> lastTxPacket = m_txQueue->Peek ();
-                        PLC_MacHeader txMacHdr;
+			PLC_MacHeader txMacHdr;
 			lastTxPacket->PeekHeader(txMacHdr);
 
 			if (m_rxHeader.GetSequenceNumber() == txMacHdr.GetSequenceNumber())
@@ -975,7 +975,7 @@ PLC_HarqMac::NotifyCsmaCaConfirm (PLC_CsmaCaState state)
 	else
 	{
 		PLC_MAC_LOGIC ("Channel access failure");
-		if  (m_phy != NULL)
+		if  (m_phy != nullptr)
 		{
 			// reschedule CSMA/CA
 			if (m_csmaca_attempts++ < MAX_CSMACA_ATTEMPTS)
@@ -1057,7 +1057,7 @@ PLC_HarqMac::NotifyTransmissionEnd (void)
 	{
 		// Data frame sent
 		Ptr<const Packet> p = m_txQueue->Peek ();
-                NS_ASSERT_MSG (p, "No packet in send queue, something went wrong!");
+		NS_ASSERT_MSG (p, "No packet in send queue, something went wrong!");
 
 		PLC_MacHeader macHdr;
 		p->PeekHeader(macHdr);
@@ -1112,20 +1112,20 @@ PLC_HarqMac::AcknowledgementTimeout(void)
 
 			if (!m_transmission_failed_callback.IsNull())
 			{
-                                Ptr<Packet> lp = p->Copy();
-                                PLC_MacHeader hdr;
-                                lp->RemoveHeader(hdr);
+                Ptr<Packet> lp = p->Copy();
+                PLC_MacHeader hdr;
+                lp->RemoveHeader(hdr);
 
-                                if (hdr.GetHasRelayHeader())
-                                {
-                                PLC_RelayMacHeader relayHeader;
-                                lp->RemoveHeader (relayHeader);
-                                }
+                if (hdr.GetHasRelayHeader())
+                {
+                    PLC_RelayMacHeader relayHeader;
+                    lp->RemoveHeader (relayHeader);
+                }
 
-                                Mac48Address src_addr = hdr.GetSrcAddress ();
-                                Mac48Address dst_addr = hdr.GetDstAddress ();
+                Mac48Address src_addr = hdr.GetSrcAddress ();
+                Mac48Address dst_addr = hdr.GetDstAddress ();
 				m_transmission_failed_callback (lp, src_addr, dst_addr);
-			        }
+			}
 
 			if (m_txQueue->IsEmpty () == false)
 			{
@@ -1147,21 +1147,21 @@ PLC_HarqMac::NotifyAcknowledgement (void)
 	Ptr<Packet> p = m_txQueue->Dequeue();
 	m_send_redundancy = false;
 
-        PLC_MacHeader hdr;
-        p->RemoveHeader(hdr);
+    PLC_MacHeader hdr;
+    p->RemoveHeader(hdr);
 
-        if (hdr.GetHasRelayHeader())
-        {
-                PLC_RelayMacHeader relayHeader;
-                p->RemoveHeader (relayHeader);
-        }
+    if (hdr.GetHasRelayHeader())
+    {
+        PLC_RelayMacHeader relayHeader;
+        p->RemoveHeader (relayHeader);
+    }
 
-        Mac48Address src_addr = hdr.GetSrcAddress ();
-        Mac48Address dst_addr = hdr.GetDstAddress ();
+    Mac48Address src_addr = hdr.GetSrcAddress ();
+    Mac48Address dst_addr = hdr.GetDstAddress ();
 
 	if (!m_acknowledgement_callback.IsNull())
 	{
-                m_acknowledgement_callback(m_csmaca_attempts, p, src_addr, dst_addr);
+		m_acknowledgement_callback(m_csmaca_attempts, p, src_addr, dst_addr);
 	}
 
 	if (m_txQueue->IsEmpty() == false)

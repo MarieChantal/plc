@@ -101,7 +101,7 @@ PLC_SimulatorImpl::SetScheduler (ObjectFactory schedulerFactory)
 {
   Ptr<Scheduler> scheduler = schedulerFactory.Create<Scheduler> ();
 
-  if (m_events != 0)
+  if (m_events != nullptr)
     {
       while (!m_events->IsEmpty ())
         {
@@ -181,7 +181,7 @@ PLC_SimulatorImpl::Stop (void)
   m_stop = true;
 }
 
-void
+EventId
 PLC_SimulatorImpl::Stop (Time const &time)
 {
   Simulator::Schedule (time, &Simulator::Stop);
@@ -366,7 +366,7 @@ PLC_SimulatorImpl::SetGranularity(Time granularity)
 uint64_t
 PLC_SimulatorImpl::GetEventCount (void) const
 {
-  return m_simulator->GetEventCount ();
+    return m_simulator->GetEventCount ();
 }
 
 uint64_t

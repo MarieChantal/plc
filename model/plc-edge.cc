@@ -214,7 +214,7 @@ PLC_Edge::GetEdgeTransferUnit(PLC_Node *dst_node)
 
 
 	NS_ASSERT(m_edge_transfer_data.find(dst_node) != m_edge_transfer_data.end());
-	NS_ASSERT(m_edge_transfer_data[dst_node].edge_transfer_unit != NULL);
+	NS_ASSERT(m_edge_transfer_data[dst_node].edge_transfer_unit != nullptr);
 
 	PLC_EdgeTransferUnit *ret = PeekPointer(m_edge_transfer_data[dst_node].edge_transfer_unit);
 
@@ -227,7 +227,7 @@ PLC_Edge::GetUpdatedEdgeTransferUnit(PLC_Node *dst_node)
 	PLC_LOG_FUNCTION(this << dst_node);
 
 	NS_ASSERT(m_edge_transfer_data.find(dst_node) != m_edge_transfer_data.end());
-	NS_ASSERT(m_edge_transfer_data[dst_node].edge_transfer_unit != NULL);
+	NS_ASSERT(m_edge_transfer_data[dst_node].edge_transfer_unit != nullptr);
 
 	if (IsEdgeTransferFactorUp2Date (dst_node) == false)
 	{
@@ -472,7 +472,7 @@ PLC_Line::CalculateInputImpedance(PLC_Node *dst_node)
 		{
 			NS_LOG_INFO("Destination node has parallel shunt impedance");
 			PLC_Impedance *node_impedance = dst_node->GetImpedancePeekPtr();
-			NS_ASSERT(node_impedance != NULL);
+			NS_ASSERT(node_impedance != nullptr);
 
 			if (node_impedance->IsTimeVariant())
 				EqImpIsTimeVariant = true;
@@ -613,7 +613,7 @@ PLC_Line::CalculateEdgeTransferFactor (PLC_Node *dst_node)
 
 
 	// indicates destination node is leaf and open circuit
-	if (load_impedance == NULL) {
+	if (load_impedance == nullptr) {
 
 		PLC_LOG_LOGIC("Destination node is leaf and open circuit");
 
@@ -761,7 +761,7 @@ PLC_TwoPort::CalculateInputImpedance (PLC_Node *dst_node)
 
 		if (!dst_node->IsOpenCircuit()) {
 			PLC_Impedance *node_impedance = dst_node->GetImpedancePeekPtr();
-			NS_ASSERT(node_impedance != NULL);
+			NS_ASSERT(node_impedance != nullptr);
 
 			if (node_impedance->IsTimeVariant())
 				EqImpIsTimeVariant = true;

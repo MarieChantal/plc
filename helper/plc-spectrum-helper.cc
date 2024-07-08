@@ -51,7 +51,7 @@ void PLC_SpectrumModelHelper::CreateSpectrumModel(void)
 
 double PLC_SpectrumModelHelper::GetCenterFreq(void)
 {
-	if (m_spectrum_model == NULL) return 0;
+	if (m_spectrum_model == nullptr) return 0;
 
 	return (this->m_spectrum_model->Begin() + this->m_spectrum_model->GetNumBands() / 2)->fc;
 }

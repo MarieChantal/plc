@@ -25,7 +25,6 @@
 #include <ns3/random-variable-stream.h>
 #include "plc-link-performance-model.h"
 #include "plc-phy.h"
-#include "plc-time.h"
 
 NS_LOG_COMPONENT_DEFINE ("PLC_LinkPerformanceModel");
 
@@ -36,22 +35,29 @@ namespace ns3 {
 NS_OBJECT_ENSURE_REGISTERED (PLC_LinkPerformanceModel);
 
 TypeId
-PLC_LinkPerformanceModel::GetTypeId (void)
+PLC_LinkPerformanceModel::GetTypeId  (void)
 {
-	static TypeId tid = TypeId ("ns3::PLC_LinkPerformanceModel")
-	.SetParent<Object> ()
-	.AddTraceSource ("RxSignalTrace",
-					 "Power spectral density of reception signal",
-					 MakeTraceSourceAccessor  (&PLC_LinkPerformanceModel::m_rxSignalTracer),
-					 "ns3::SpectrumVaue::TracedCallback")
+	static TypeId tid = ns3::TypeId ("ns3::PLC_LinkPerformanceModel")
+	.SetParent<Object>  ()
+	.SetGroupName("PLC")
+    .AddTraceSource ("RxSignalTrace",
+			         "Power spectral density of reception signal",
+			         MakeTraceSourceAccessor  (&PLC_LinkPerformanceModel::m_rxSignalTracer),
+					 "ns3::TracedValue< SpectrumValue >", // Initial value
+					 TypeId::SUPPORTED, // Support level
+					 "PLC") // Module
 	.AddTraceSource ("NoiseTrace",
 					 "Power spectral density of noise during reception",
 					 MakeTraceSourceAccessor  (&PLC_LinkPerformanceModel::m_noiseTracer),
-					 "ns3::SpectrumVaue::TracedCallback")
+					 "ns3::TracedValue< SpectrumValue >", // Initial value
+					 TypeId::SUPPORTED, // Support level
+					 "PLC") // Module
 	.AddTraceSource ("SinrTrace",
 					 "Signal to Interference plus Noise Ratio during reception",
 					 MakeTraceSourceAccessor  (&PLC_LinkPerformanceModel::m_sinrTracer),
-				 	 "ns3::SpectrumVaue::TracedCallback")
+					 "ns3::TracedValue< SpectrumValue >", // Initial value
+					 TypeId::SUPPORTED, // Support level
+					 "PLC") // Module
 	;
 	return tid;
 }
@@ -298,7 +304,7 @@ void
 PLC_ErrorRateModel::DoEvaluateChunk(void)
 {
 	NS_LOG_FUNCTION(this);
-	NS_ASSERT_MSG(m_block_duration > Time::FromDouble(0.0, Time::S), "Block duration is not set!");
+	NS_ASSERT_MSG(m_block_duration.IsStrictlyPositive(), "Block duration is not set!");
 	double numblocks = (Now() - m_lastChangeTime).GetInteger() / GetBlockDuration().GetInteger();
 
 	m_packet_success_rate *= GetChunkSuccessRate(numblocks);

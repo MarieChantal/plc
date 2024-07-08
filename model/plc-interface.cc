@@ -19,7 +19,7 @@
  */
 
 #include <boost/graph/copy.hpp>
-#include <ns3/system-thread.h>
+#include <thread>
 #include <ns3/plc-defs.h>
 #include <ns3/log.h>
 #include <ns3/simulator.h>
@@ -318,7 +318,7 @@ PLC_TxInterface::InitializeTx (Ptr<const SpectrumValue> txPsd, Time duration, Pt
 	PLC_LOG_FUNCTION (this << txPsd << duration << metaInfo);
 
 	uint32_t sendIf;
-	if (metaInfo != NULL)
+	if (metaInfo != nullptr)
 	{
 		NS_ASSERT_MSG (sendIf = GetTxIfIdx (), "TX interface has not been registered at PLC_Channel yet!");
 		this->m_txPsd = txPsd;
@@ -401,7 +401,7 @@ void
 PLC_RxInterface::InitializeRx (uint32_t txId, Ptr<const SpectrumValue> rxPsd, Time duration, Ptr<const PLC_TrxMetaInfo> metaInfo)
 {
 	PLC_LOG_FUNCTION (this << rxPsd << metaInfo);
-	if  (this->m_phy != NULL)
+	if  (this->m_phy != nullptr)
 	{
 		m_phy->InitializeRx (txId, rxPsd, duration, metaInfo);
 	}
@@ -411,7 +411,7 @@ void
 PLC_RxInterface::RxPsdChanged (uint32_t txId, Ptr<const SpectrumValue> rxSignal)
 {
 	PLC_LOG_FUNCTION (this << rxSignal);
-	if  (this->m_phy != NULL)
+	if  (this->m_phy != nullptr)
 		this->m_phy->RxPsdChanged (txId, rxSignal);
 }
 

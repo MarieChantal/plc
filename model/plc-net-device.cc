@@ -215,7 +215,7 @@ PLC_NetDevice::LinkUp (void)
 	NS_LOG_FUNCTION (this);
 	m_linkUp = true;
 
-	if (GetPhy() != NULL)
+	if (GetPhy() != nullptr)
 	{
 		GetPhy()->Initialize();
 	}
@@ -414,22 +414,22 @@ void
 PLC_NetDevice::CompleteConfig (void)
 {
 	NS_LOG_FUNCTION (this);
-	if (m_spectrum_model == 0
-	  || m_noiseFloor == 0
-	  || m_txPsd == 0
-	  || m_node == 0
-	  || m_plc_node == 0
+	if (m_spectrum_model == nullptr
+	  || m_noiseFloor == nullptr
+	  || m_txPsd == nullptr
+	  || m_node == nullptr
+	  || m_plc_node == nullptr
 	  || ConfigComplete())
 	{
 	  return;
 	}
 
-	if (m_phy == 0)
+	if (m_phy == nullptr)
 	{
 		m_phy = CreateObject<PLC_InformationRatePhy> ();
 	}
 
-	if (m_mac == 0)
+	if (m_mac == nullptr)
 	{
 		m_mac = CreateObject<PLC_ArqMac> ();
 	}

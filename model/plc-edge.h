@@ -23,7 +23,7 @@
 
 #include <map>
 
-#include <ns3/system-mutex.h>
+#include <mutex>
 
 #include "plc-defs.h"
 #include "plc-cable.h"
