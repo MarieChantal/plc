@@ -65,6 +65,7 @@ public:
 	virtual void SetScheduler (ObjectFactory schedulerFactory);
 	virtual uint32_t GetSystemId (void) const;
 	virtual uint32_t GetContext (void) const;
+        virtual uint64_t GetEventCount (void) const;//ADD FRANCOIS
 
 private:
 	virtual void DoDispose (void);
@@ -82,7 +83,7 @@ private:
 	// number of events that have been inserted but not yet scheduled,
 	// not counting the "destroy" events; this is used for validation
 	int m_unscheduledEvents;
-
+        Ptr<SimulatorImpl> m_simulator; ///< the simulator implementation
 	Time 		m_granularity;
 	int64_t 	m_tick_ts;
 };

@@ -145,7 +145,8 @@ PLC_ChannelTransferImpl::GetTypeId  (void)
     	    		 	 	MakeTimeChecker  ())
 			.AddTraceSource  ("PLC_ChannelData",
 							 "Channel Transfer Function Data after every change",
-							 MakeTraceSourceAccessor  (&PLC_ChannelTransferImpl::m_channelDataTracer))
+							 MakeTraceSourceAccessor  (&PLC_ChannelTransferImpl::m_channelDataTracer),
+                                                         "ns3::PLC_TransferBase::TracedCallback")
     	    ;
 	return tid;
 }
@@ -921,10 +922,12 @@ PLC_Channel::GetTypeId  (void)
     		.SetParent<Channel>  ()
     	    .AddTraceSource ("PLC_ChannelState",
     	                     "Trace occupancy of the channel",
-    	                     MakeTraceSourceAccessor (&PLC_Channel::m_occupancyLogger))
-			.AddTraceSource ("PLC_ActiveTransmitters",
-							 "Trace active transmission sources",
-							 MakeTraceSourceAccessor (&PLC_Channel::m_activeTxIfLogger))
+    	                     MakeTraceSourceAccessor (&PLC_Channel::m_occupancyLogger),
+                             "ns3::uint32_t::TracedCallback")
+	    .AddTraceSource ("PLC_ActiveTransmitters",
+		             "Trace active transmission sources",
+        	             MakeTraceSourceAccessor (&PLC_Channel::m_activeTxIfLogger),
+                             "ns3::uint32_t::TracedCallback")
 			;
 	return tid;
 }

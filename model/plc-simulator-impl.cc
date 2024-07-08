@@ -364,6 +364,12 @@ PLC_SimulatorImpl::SetGranularity(Time granularity)
 }
 
 uint64_t
+PLC_SimulatorImpl::GetEventCount (void) const
+{
+  return m_simulator->GetEventCount ();
+}
+
+uint64_t
 PLC_SimulatorImpl::GetQuantizedTicks(Time time)
 {
 	int64_t ts = time.GetInteger();

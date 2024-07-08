@@ -34,23 +34,23 @@ using namespace ns3;
 void
 ReceivedACK(uint32_t retries, Ptr<Packet> p, Mac48Address snd, Mac48Address rcv)
 {
-	NS_LOG_UNCOND(Simulator::Now() << ": ACK XXXXXXXXXXX received retries=" 
-            << retries << " pktlen=" << p->GetSize()
-            << " sndr=" << snd << " rcvr=" << rcv);
+	//NS_LOG_UNCOND(Simulator::Now() << ": ACK XXXXXXXXXXX received retries=" 
+          //  << retries << " pktlen=" << p->GetSize()
+          //  << " sndr=" << snd << " rcvr=" << rcv);
 }
 
 void
 ReceivedDATA(Ptr<Packet> pkt, Mac48Address snd, Mac48Address rcv)
 {
-	NS_LOG_UNCOND(Simulator::Now() << ": DATA YYYYYYYYY received!");
+	//NS_LOG_UNCOND(Simulator::Now() << ": DATA YYYYYYYYY received!");
 }
 
 void
 FailedData(Ptr<const Packet> pkt, Mac48Address snd, Mac48Address rcv)
 {
-	NS_LOG_UNCOND(Simulator::Now() << ": DATA ZZZZZZZZZZ failed! len:"
-            << pkt->GetSize() << " snd:" << snd
-            << " rcv:" << rcv);
+	//NS_LOG_UNCOND(Simulator::Now() << ": DATA ZZZZZZZZZZ failed! len:"
+           // << pkt->GetSize() << " snd:" << snd
+           // << " rcv:"
 }
 
 int main (int argc, char *argv[])

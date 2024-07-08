@@ -61,16 +61,20 @@ PLC_Interference::GetTypeId  (void)
 			.SetParent<Object>  ()
 			.AddTraceSource  ("AllSignals",
 							 "Sum of all signal PSDs at the receiver frontend",
-							 MakeTraceSourceAccessor  (&PLC_Interference::m_sumSignalTracer))
+							 MakeTraceSourceAccessor  (&PLC_Interference::m_sumSignalTracer),
+                                                         "ns3::SpectrumValue::TracedCallCallBack")
 			.AddTraceSource  ("RxSignal",
 							 "PSD of the signal the receiver is currently locked to",
-							 MakeTraceSourceAccessor  (&PLC_Interference::m_rxSignalTracer))
+							 MakeTraceSourceAccessor  (&PLC_Interference::m_rxSignalTracer),
+                                                         "ns3::SpectrumValue::TracedCallCallBack")
 			.AddTraceSource  ("NoiseSignals",
 							 "Sum of all interfering signals at the receiver frontend",
-							 MakeTraceSourceAccessor  (&PLC_Interference::m_noiseSignalTracer))
+							 MakeTraceSourceAccessor  (&PLC_Interference::m_noiseSignalTracer),
+                                                         "ns3::SpectrumValue::TracedCallCallBack")
 			.AddTraceSource  ("SINR",
 							 "Signal to Interference plus Noise Ratio while receiving",
-							 MakeTraceSourceAccessor  (&PLC_Interference::m_SinrTracer))
+							 MakeTraceSourceAccessor  (&PLC_Interference::m_SinrTracer),
+                                                         "ns3::SpectrumValue::TracedCallCallBack")
 			;
 	return tid;
 }

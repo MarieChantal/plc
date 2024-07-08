@@ -1,4 +1,5 @@
 # PLC NS-3 Module
+This software is an updated version of the famous PLC model for ns-3, tested and running with last dev version of ns-3.
 
 An ns-3 module for simulations of power line communication networks
 
