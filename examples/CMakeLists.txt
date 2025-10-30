@@ -49,8 +49,8 @@ build_lib_example(
 )
 
 build_lib_example(
-  NAME plc-test
-  SOURCE_FILES plc-test.cc
+  NAME plc-channel-test
+  SOURCE_FILES plc-channel-test.cc
   LIBRARIES_TO_LINK
     ${libcore}
     ${libspectrum}

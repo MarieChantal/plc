@@ -67,6 +67,7 @@ build_lib(
   HEADER_FILES ${header_files}
   LIBRARIES_TO_LINK
     ${libcore}
+    ${libbridge}
     ${libspectrum}
     ${libnetwork}
     ${OpenMP_CXX_LIBRARIES}

@@ -589,7 +589,7 @@ Ptr<ImpedanceReturnType> CalcEquivalentImpedance(Ptr<const SpectrumModel> sm, st
 //		(*p_it)->Unlock();
 	}
 
-	return Create<ImpedanceReturnType>(1 / inv_ret);
+	return CreateObject<ImpedanceReturnType>(1 / inv_ret);
 }
 
 }

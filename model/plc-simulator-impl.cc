@@ -184,7 +184,7 @@ PLC_SimulatorImpl::Stop (void)
 EventId
 PLC_SimulatorImpl::Stop (Time const &time)
 {
-  Simulator::Schedule (time, &Simulator::Stop);
+  return Simulator::Schedule (time, &Simulator::Stop);
 }
 
 //

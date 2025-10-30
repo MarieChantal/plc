@@ -712,7 +712,7 @@ PLC_ArqMac::NotifyTransmissionEnd (void)
 		{
 			PLC_MAC_LOGIC ("Winding up acknowledgement timeout clock...");
 
-                        if (m_timeoutEvent.IsRunning ())
+                        if (m_timeoutEvent.IsPending ())
 			{
 				m_timeoutEvent.Cancel ();
 			}
@@ -1074,7 +1074,7 @@ PLC_HarqMac::NotifyTransmissionEnd (void)
 		{
 			PLC_MAC_LOGIC ("Winding up acknowledgement timeout clock...");
 
-			if (m_acknowledgementTimeoutEvent.IsRunning ())
+			if (m_acknowledgementTimeoutEvent.IsPending ())
 			{
 				m_acknowledgementTimeoutEvent.Cancel ();
 			}

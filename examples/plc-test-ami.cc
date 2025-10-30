@@ -56,7 +56,7 @@ int main (int argc, char *argv[])
 	Ptr<PLC_Cable> houseCable = CreateObject<PLC_NAYY150SE_Cable> (sm);
 
 	// Node shunt impedance
-	Ptr<PLC_ConstImpedance> shuntImp = Create<PLC_ConstImpedance> (sm, PLC_Value(50, 0));
+	Ptr<PLC_ConstImpedance> shuntImp = CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50, 0));
 
 	Ptr<PLC_Graph> graph = CreateObject<PLC_Graph> ();
 
@@ -107,14 +107,14 @@ int main (int argc, char *argv[])
 	Ptr<PLC_Channel> channel = CreateObject<PLC_Channel> ();
 	channel->SetGraph(graph);
 
-	Ptr<PLC_Outlet> outlet1 = CreateObject<PLC_Outlet> (n1, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet2 = CreateObject<PLC_Outlet> (n2, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet3 = CreateObject<PLC_Outlet> (n3, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet4 = CreateObject<PLC_Outlet> (n4, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet5 = CreateObject<PLC_Outlet> (n5, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet6 = CreateObject<PLC_Outlet> (n6, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet7 = CreateObject<PLC_Outlet> (n7, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
-	Ptr<PLC_Outlet> outlet8 = CreateObject<PLC_Outlet> (n8, Create<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet1 = CreateObject<PLC_Outlet> (n1, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet2 = CreateObject<PLC_Outlet> (n2, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet3 = CreateObject<PLC_Outlet> (n3, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet4 = CreateObject<PLC_Outlet> (n4, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet5 = CreateObject<PLC_Outlet> (n5, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet6 = CreateObject<PLC_Outlet> (n6, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet7 = CreateObject<PLC_Outlet> (n7, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
+	Ptr<PLC_Outlet> outlet8 = CreateObject<PLC_Outlet> (n8, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(50,0)));
 
 //	channel->AddTxInterface(CreateObject<PLC_TxInterface> (n4, sm));
 	channel->AddRxInterface(CreateObject<PLC_RxInterface> (n4, sm));
@@ -128,9 +128,9 @@ int main (int argc, char *argv[])
 	channel->InitTransmissionChannels();
 	channel->CalcTransmissionChannels();
 
-//	Simulator::Schedule(Seconds(0.5), &PLC_Outlet::SetImpedance, outlet7, Create<PLC_TimeVariantFreqSelectiveImpedance> (PLC_ConstImpedance(sm, PLC_Value(5,0))), true);
-//	Simulator::Schedule(Seconds(1), &PLC_Outlet::SetImpedance, outlet3, Create<PLC_ConstImpedance> (sm, PLC_Value(5,0)), true);
-//	Simulator::Schedule(Seconds(2), &PLC_Outlet::SetImpedance, outlet6, Create<PLC_ConstImpedance> (sm, PLC_Value(5,0)), true);
+//	Simulator::Schedule(Seconds(0.5), &PLC_Outlet::SetImpedance, outlet7, CreateObject<PLC_TimeVariantFreqSelectiveImpedance> (PLC_ConstImpedance(sm, PLC_Value(5,0))), true);
+//	Simulator::Schedule(Seconds(1), &PLC_Outlet::SetImpedance, outlet3, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(5,0)), true);
+//	Simulator::Schedule(Seconds(2), &PLC_Outlet::SetImpedance, outlet6, CreateObject<PLC_ConstImpedance> (sm, PLC_Value(5,0)), true);
 
 	time_t start, end;
 	time (&start);

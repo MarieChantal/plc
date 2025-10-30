@@ -228,43 +228,29 @@ PLC_NetDeviceHelper::GetDevice(std::string name)
 NodeContainer
 PLC_NetDeviceHelper::GetNS3Nodes (void)
 {
-	NodeContainer c;
-	PLC_NetdeviceMap::iterator dit;
-        Ptr<Node> nodes[m_netdeviceMap.size()];
-
-	for (dit = m_netdeviceMap.begin(); dit != m_netdeviceMap.end(); dit++)
-	{
-		Ptr<Node> n = dit->second->GetNode();
-		nodes[n->GetId()] = n;
-	}
-
-	for(uint i = 0; i < m_netdeviceMap.size(); i++)
-	{
-		c.Add(nodes[i]);
-	}
-
-	return c;
+  NodeContainer c;
+  PLC_NetdeviceMap::iterator dit;
+  for (dit = m_netdeviceMap.begin(); dit != m_netdeviceMap.end(); ++dit)
+  {
+    Ptr<Node> n = dit->second->GetNode();
+    if (n)  // Sécurité contre null
+    {
+      c.Add(n);
+    }
+  }
+  return c;
 }
 
 NetDeviceContainer
 PLC_NetDeviceHelper::GetNetDevices (void)
 {
-	NetDeviceContainer c;
-	PLC_NetdeviceMap::iterator dit;
-        Ptr<PLC_NetDevice> netdevs[m_netdeviceMap.size()];
-
-	for (dit = m_netdeviceMap.begin(); dit != m_netdeviceMap.end(); dit++)
-	{
-		Ptr<PLC_NetDevice> n = dit->second;
-		netdevs[n->GetNode()->GetId()] = n;
-	}
-
-	for(uint i = 0; i < m_netdeviceMap.size(); i++)
-	{
-		c.Add(netdevs[i]);
-	}
-
-	return c;
+  NetDeviceContainer c;
+  PLC_NetdeviceMap::iterator dit;
+  for (dit = m_netdeviceMap.begin(); dit != m_netdeviceMap.end(); ++dit)
+  {
+    c.Add(dit->second);
+  }
+  return c;
 }
 
 } // namespace ns3
